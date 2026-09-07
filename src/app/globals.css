@@ -12,6 +12,9 @@ html {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-gold: #DDBA83;
+  --color-brand-cream: #FFFCF7;
+  --color-brand-navy: #2B425D;
   --font-sans: var(--font-proxima-nova);
   --font-display: var(--font-kanit);
   --font-script: var(--font-satisfy);

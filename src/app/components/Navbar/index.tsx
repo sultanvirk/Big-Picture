@@ -1,6 +1,8 @@
-import { ChevronDown, Menu, PhoneCall } from "lucide-react";
+"use client";
+
+import { ChevronDown, Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
-import { createElement, type ComponentType } from "react";
+import { createElement, useEffect, useState, type ComponentType } from "react";
 import {
 	FaFacebookF,
 	FaInstagram,
@@ -40,6 +42,23 @@ const navItems: NavItem[] = [
 ];
 
 export default function Navbar() {
+	const [menuOpen, setMenuOpen] = useState(false);
+
+	useEffect(() => {
+		if (!menuOpen) return;
+
+		const closeOnEscape = (event: KeyboardEvent) => {
+			if (event.key === "Escape") setMenuOpen(false);
+		};
+		document.body.style.overflow = "hidden";
+		document.addEventListener("keydown", closeOnEscape);
+
+		return () => {
+			document.body.style.overflow = "";
+			document.removeEventListener("keydown", closeOnEscape);
+		};
+	}, [menuOpen]);
+
 	return (
 		<header className="font-kanit relative z-20 bg-[#fffdf9] text-[#1a3657] shadow-sm">
 			<div className="flex h-10 items-center justify-between bg-[#fffdf9] px-4 text-[#426b9d] lg:h-9 lg:bg-[#80b1f0] lg:px-5 lg:text-white sm:px-8 lg:px-9 2xl:h-10 2xl:px-12">
@@ -48,7 +67,7 @@ export default function Navbar() {
 					<span className="hidden lg:inline">
 					CALL US TODAY:{" "}
 					</span>
-					<a className="ml-1 font-normal" href="tel:3462302811">
+					<a className="ml-1 font-semibold" href="tel:3462302811">
 						(346) 230-2811
 					</a>
 				</span>
@@ -63,21 +82,34 @@ export default function Navbar() {
 			</div>
 
 			<div className="relative flex h-0 min-h-0 w-full items-center justify-between gap-4 px-4 sm:px-8 lg:h-auto lg:min-h-[68px] lg:px-9 2xl:min-h-[76px] 2xl:px-12">
-				<details className="relative z-20 lg:hidden">
-					<summary className="absolute right-0 top-[-30px] cursor-pointer list-none text-[#1a3657] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4a45f]">
-						<Menu className="h-6 w-6" aria-label="Open navigation menu" />
-					</summary>
-					<nav className="absolute right-0 top-2 w-64 rounded-sm bg-[#fffdf9] py-3 shadow-lg" aria-label="Mobile navigation">
+				<div className="lg:hidden">
+					<button
+						type="button"
+						aria-expanded={menuOpen}
+						aria-controls="mobile-navigation"
+						aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+						onClick={() => setMenuOpen((open) => !open)}
+						className="absolute right-0 top-[-30px] z-50 text-[#1a3657] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4a45f]"
+					>
+						{menuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+					</button>
+
+					<div className={`fixed inset-0 z-40 bg-[#2B425D]/35 transition-opacity duration-300 ${menuOpen ? "visible opacity-100" : "invisible opacity-0"}`} aria-hidden="true" onClick={() => setMenuOpen(false)} />
+					<nav
+						id="mobile-navigation"
+						aria-label="Mobile navigation"
+						className={`fixed right-0 top-0 z-40 h-[100dvh] w-[min(20rem,calc(100vw-1rem))] overflow-y-auto bg-[#FFFCF7] px-6 pb-8 pt-24 shadow-2xl transition-transform duration-300 ease-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+					>
 						{navItems.map((item) => (
 							<div key={item.label}>
-								<a href={item.href} className="block px-5 py-2 text-sm font-normal uppercase text-[#1a3657] hover:bg-[#eef5fd]">{item.label}</a>
+								<a href={item.href} onClick={() => setMenuOpen(false)} className="block border-b border-[#2B425D]/10 py-3 text-sm font-normal uppercase text-[#2B425D]">{item.label}</a>
 								{item.dropdown?.map((child) => (
-									<a key={child.label} href={child.href} className="block px-8 py-1.5 text-xs text-[#426b9d] hover:bg-[#eef5fd]">{child.label}</a>
+									<a key={child.label} href={child.href} onClick={() => setMenuOpen(false)} className="block py-2 pl-4 text-xs text-[#426b9d]">{child.label}</a>
 								))}
 							</div>
 						))}
 					</nav>
-				</details>
+				</div>
 				<nav className="hidden items-center gap-5 lg:flex 2xl:gap-7" aria-label="Primary navigation">
 					{navItems.map((item) => (
 						<div
@@ -105,8 +137,8 @@ export default function Navbar() {
 					))}
 				</nav>
 
-				<a href="#home" className="absolute left-1/2 top-[-40px] z-10 flex h-10 w-24 -translate-x-1/2 items-start justify-center lg:top-0 lg:h-[130px] lg:w-[220px] 2xl:h-[146px] 2xl:w-[250px]">
-					<span className="absolute hidden rounded-b-[34px] bg-[#fffdf9] shadow-sm lg:top-9 lg:block lg:h-[94px] lg:w-full 2xl:top-10 2xl:h-[106px] 2xl:rounded-b-[40px]" aria-hidden="true" />
+				<a href="#home" className="absolute left-1/2 top-[-40px] z-10 flex h-10 w-24 -translate-x-1/2 items-start justify-center lg:-top-9 lg:h-[130px] lg:w-[220px] 2xl:-top-10 2xl:h-[146px] 2xl:w-[250px]">
+					<span className="absolute inset-0 hidden rounded-b-[34px] bg-[#fffdf9] shadow-sm lg:block 2xl:rounded-b-[40px]" aria-hidden="true" />
 					<Image
 						src={logo}
 						alt="Big Picture Pediatric Dentistry"

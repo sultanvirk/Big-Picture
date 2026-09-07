@@ -14,7 +14,7 @@ export default function Footer() {
 			<div className="relative z-10 bg-[#2d496b] px-6 pb-8 pt-14 sm:px-10 lg:px-14">
 				
 
-				<div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[1.1fr_1fr_1.1fr] lg:gap-12">
+				<div className="mx-auto grid max-w-[1800px] gap-10 lg:grid-cols-[1.1fr_1fr_1.1fr] lg:gap-12">
 					<Appointment />
 					<div className="border-y border-white/10 py-8 text-center lg:border-x lg:border-y-0 lg:px-12">
 						<Image src={logo} alt="Big Picture Pediatric Dentistry" width={190} height={120} className="mx-auto h-auto w-[190px] brightness-0 invert" />
@@ -23,7 +23,7 @@ export default function Footer() {
 					</div>
 					<ContactDetails />
 				</div>
-				<div className="mx-auto mt-10 flex max-w-[1180px] justify-between border-t border-white/10 pt-4 text-[10px] text-white/65"><span>© Big Picture Pediatric Dentistry 2026</span><span>Privacy Policy</span></div>
+				<div className="mx-auto mt-10 flex max-w-[1800px] justify-between border-t border-white/10 pt-4 text-[10px] text-white/65"><span>© Big Picture Pediatric Dentistry 2026</span><span>Privacy Policy</span></div>
 			</div>
 		</footer>
 	);

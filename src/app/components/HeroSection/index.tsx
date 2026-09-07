@@ -1,5 +1,6 @@
 import { ArrowUpRight, PhoneCall } from "lucide-react";
 import Image from "next/image";
+import brandIcon from "../../assets/Brandicon.png";
 import heroImage from "../../assets/hero.png";
 import { H1 } from "../ui/typography";
 
@@ -20,7 +21,7 @@ export default function HeroSection() {
 
 			<div className="relative z-10 mx-auto flex -translate-y-2 max-w-5xl flex-col items-center px-5 pt-8 text-center sm:-translate-y-10 sm:pt-20 2xl:-translate-y-14 2xl:max-w-6xl 2xl:pt-24">
 				<p className="font-satisfy text-[16px] leading-tight text-[#e7bc77] sm:text-[29px] 2xl:text-[34px]">Loved By Kids And Parents Alike</p>
-				<H1 className="mt-3 max-w-4xl text-balance text-[25px] uppercase leading-[1.03] tracking-tight sm:mt-4 sm:text-[52px] lg:text-[58px] 2xl:max-w-5xl 2xl:text-[72px]">
+				<H1 className="mt-3 max-w-4xl text-balance text-[25px] uppercase leading-[1.03] tracking-tight sm:mt-4 sm:text-[52px] lg:text-[58px] 2xl:max-w-5xl 2xl:text-[72px] text-[#FFFCF7]">
 					Big Picture
 					<br />
 					Pediatric Dentistry
@@ -41,7 +42,13 @@ export default function HeroSection() {
 				</div>
 			</div>
 
-			
+			<div className="pointer-events-none absolute bottom-[-1px] left-0 z-20 h-12 w-full lg:hidden" aria-hidden="true">
+				<div className="absolute inset-0 bg-[#FFFCF7]" style={{ clipPath: "polygon(0 30%, 16% 12%, 32% 28%, 50% 52%, 68% 28%, 84% 12%, 100% 30%, 100% 100%, 0 100%)" }} />
+				<div className="absolute inset-x-0 bottom-0 h-8 bg-[#5f8fc8]" style={{ clipPath: "polygon(0 35%, 16% 17%, 32% 33%, 50% 57%, 68% 33%, 84% 17%, 100% 35%, 100% 100%, 0 100%)" }} />
+				<div className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-[#80b1f0] bg-[#80b1f0] shadow-[0_0_0_5px_rgba(43,66,93,0.2)]">
+					<Image src={brandIcon} alt="" width={71} height={71} className="h-full w-full rounded-full" />
+				</div>
+			</div>
 		</section>
 	);
 }
