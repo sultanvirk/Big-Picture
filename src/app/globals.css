@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,8 +12,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-gold: #DDBA83;
+  --color-brand-cream: #FFFCF7;
+  --color-brand-navy: #2B425D;
+  --font-sans: var(--font-proxima-nova);
+  --font-display: var(--font-kanit);
+  --font-script: var(--font-satisfy);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +30,21 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-proxima-nova);
+}
+
+:root {
+  --font-proxima-nova: "Proxima Nova", "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-proxima {
+  font-family: var(--font-proxima-nova);
+}
+
+.font-kanit {
+  font-family: var(--font-kanit), sans-serif;
+}
+
+.font-satisfy {
+  font-family: var(--font-satisfy), cursive;
 }
